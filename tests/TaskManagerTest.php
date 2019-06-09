@@ -6,6 +6,7 @@ namespace Tests\CustomerGauge\TaskManager;
 
 use CustomerGauge\TaskManager\InvalidTaskAttribute;
 use CustomerGauge\TaskManager\Task;
+use CustomerGauge\TaskManager\Reversible;
 use CustomerGauge\TaskManager\TaskManager;
 use PHPUnit\Framework\TestCase;
 
@@ -75,4 +76,27 @@ class TaskManagerTest extends TestCase
 
         $manager->run([]);
     }
+
+    public function test_task_can_be_revertable() : void
+    {
+        $createEmail  = $this->createMock(ReversibleTask::class);
+        $createFolder = $this->createMock(ReversibleTask::class);
+
+        $createEmail->expects($this->once())
+            ->method('reverse');
+
+        $createFolder->expects($this->once())
+            ->method('reverse');
+
+        $manager = new TaskManager();
+
+        $manager->add($createEmail)
+           ->add($createFolder);
+
+        $manager->reverse([]);
+    }
+}
+
+interface ReversibleTask extends Task, Reversible
+{
 }

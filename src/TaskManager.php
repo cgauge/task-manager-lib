@@ -69,9 +69,11 @@ class TaskManager implements Task
             return $task instanceof Reversible;
         });
 
-        $this->strategy->execute(static function ($task) use ($attributes) : void {
-            $task->reverse($attributes);
-        }, $attributes);
+        foreach ($this->tasks as $task) {
+            $this->strategy->execute(function () use ($task, $attributes) : void {
+                $task->reverse($attributes);
+            }, $attributes);
+        }
     }
 
     /**
