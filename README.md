@@ -98,9 +98,11 @@ $taskManager->add(new FirstTask)
 
 $taskManager->run([]);
 
-// output: 
+/* 
+output: 
     firt task
     reverse first task
+*/
 ```
 
 # Contributing
