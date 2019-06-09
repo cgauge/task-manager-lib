@@ -56,7 +56,7 @@ class SecondTask implements Task
 
 $taskManager = new TaskManager(new ContinueOnFailure);
 $taskManager->add(new FirstTask)
-    ->add(new SecondTask)
+    ->add(new SecondTask);
 
 $taskManager->run([]);
 
@@ -94,7 +94,7 @@ class SecondTask implements Task
 
 $taskManager = new TaskManager(new RollbackOnFailure);
 $taskManager->add(new FirstTask)
-    ->add(new SecondTask)
+    ->add(new SecondTask);
 
 $taskManager->run([]);
 
