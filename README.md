@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/cgauge/task-manager-lib.svg?branch=master)](https://travis-ci.org/cgauge/task-manager-lib)
 [![Code Coverage](https://scrutinizer-ci.com/g/cgauge/task-manager-lib/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/cgauge/task-manager-lib/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cgauge/task-manager-lib/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cgauge/task-manager-lib/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/customergauge/task-manager/v/stable)](https://packagist.org/packages/customergauge/task-manager)
-[![License](https://poser.pugx.org/customergauge/task-manager/license)](https://packagist.org/packages/customergauge/task-manager)
+[![Latest Stable Version](https://img.shields.io/packagist/v/customergauge/task-manager.svg)](https://packagist.org/packages/customergauge/task-manager)
+[![License](https://img.shields.io/packagist/l/customergauge/task-manager.svg)](https://packagist.org/packages/customergauge/task-manager)
 
 # Task Manager ⚙️
 
