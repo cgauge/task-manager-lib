@@ -1,7 +1,7 @@
 {
     "name": "customergauge/task-manager",
     "type": "library",
-    "license": "LGPLv3",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
             "name": "Abdala Cerqueira",
