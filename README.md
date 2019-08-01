@@ -114,4 +114,4 @@ Contributions are always welcome, please have a look at our issues to see if the
 
 # License
 
-Task Manager is licensed under MIT license.
+Task Manager Library is licensed under LGPLv3 license.
