@@ -14,8 +14,8 @@ composer require customergauge/task-manager
 ## Execute a task
 
 ```php
-use Customergauge\TaskManager\Task;
-use Customergauge\TaskManager\TaskManager;
+use CustomerGauge\TaskManager\Task;
+use CustomerGauge\TaskManager\TaskManager;
 
 class SimpleTask implements Task
 {
@@ -35,9 +35,9 @@ $taskManager->run([]);
 ## Continue on failure strategy
 
 ```php
-use Customergauge\TaskManager\Task;
-use Customergauge\TaskManager\TaskManager;
-use Customergauge\TaskManager\Strategy\ContinueOnFailure;
+use CustomerGauge\TaskManager\Task;
+use CustomerGauge\TaskManager\TaskManager;
+use CustomerGauge\TaskManager\Strategy\ContinueOnFailure;
 
 class FirstTask implements Task
 {
@@ -67,10 +67,10 @@ $taskManager->run([]);
 ## Rollback executed tasks 
 
 ```php
-use Customergauge\TaskManager\Task;
-use Customergauge\TaskManager\Reversible;
-use Customergauge\TaskManager\TaskManager;
-use Customergauge\TaskManager\Strategy\RollbackOnFailure;
+use CustomerGauge\TaskManager\Task;
+use CustomerGauge\TaskManager\Reversible;
+use CustomerGauge\TaskManager\TaskManager;
+use CustomerGauge\TaskManager\Strategy\RollbackOnFailure;
 
 class FirstTask implements Task, Reversible
 {
