@@ -30,7 +30,7 @@ use PHPUnit\Framework\TestCase;
 
 class ContinueOnFailureTest extends TestCase
 {
-    public function test_it_continues_when_a_task_fail() : void
+    public function test_it_continues_when_a_task_fail(): void
     {
         $createEmail  = $this->createMock(Task::class);
         $createFolder = $this->createMock(Task::class);
@@ -43,16 +43,16 @@ class ContinueOnFailureTest extends TestCase
 
         $strategy = new ContinueOnFailure();
 
-        $strategy->execute(static function () use ($createEmail) : void {
+        $strategy->execute(static function () use ($createEmail): void {
             $createEmail->run([]);
         });
 
-        $strategy->execute(static function () use ($createFolder) : void {
+        $strategy->execute(static function () use ($createFolder): void {
             $createFolder->run([]);
         });
     }
 
-    public function test_it_stores_exceptions() : void
+    public function test_it_stores_exceptions(): void
     {
         $createEmail  = $this->createMock(Task::class);
         $createFolder = $this->createMock(Task::class);
@@ -65,11 +65,11 @@ class ContinueOnFailureTest extends TestCase
 
         $strategy = new ContinueOnFailure();
 
-        $strategy->execute(static function () use ($createEmail) : void {
+        $strategy->execute(static function () use ($createEmail): void {
             $createEmail->run([]);
         });
 
-        $strategy->execute(static function () use ($createFolder) : void {
+        $strategy->execute(static function () use ($createFolder): void {
             $createFolder->run([]);
         });
 

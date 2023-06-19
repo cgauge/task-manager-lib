@@ -25,6 +25,7 @@ namespace CustomerGauge\TaskManager;
 
 use CustomerGauge\TaskManager\Strategy\StopOnFailure;
 use CustomerGauge\TaskManager\Strategy\Strategy;
+
 use function array_filter;
 use function array_intersect_key;
 use function array_keys;
@@ -32,21 +33,20 @@ use function array_reverse;
 
 class TaskManager implements Task
 {
-    /** @var Task[] */
-    private $tasks = [];
+    /** @var Task[]|Reversible[] */
+    private array $tasks = [];
 
     /** @var mixed[] */
-    private $attributes = [];
+    private array $attributes = [];
 
-    /** @var Strategy */
-    private $strategy;
+    private Strategy $strategy;
 
-    public function __construct(?Strategy $strategy = null)
+    public function __construct(Strategy|null $strategy = null)
     {
         $this->strategy = $strategy ?? new StopOnFailure();
     }
 
-    public function add(Task $task) : self
+    public function add(Task $task): self
     {
         $this->tasks[] = $task;
 
@@ -58,12 +58,12 @@ class TaskManager implements Task
      *
      * @return mixed[]
      */
-    public function run(array $attributes) : array
+    public function run(array $attributes): array
     {
         $this->attributes = $attributes;
 
         foreach ($this->tasks as $task) {
-            $this->strategy->execute(function () use ($task) : Task {
+            $this->strategy->execute(function () use ($task): Task {
                 $attributes = $task->run($this->attributes);
 
                 $this->checkForDuplicatedKey($task, $attributes);
@@ -77,28 +77,24 @@ class TaskManager implements Task
         return $this->attributes;
     }
 
-    /**
-     * @param mixed[] $attributes
-     */
-    public function reverse(array $attributes) : void
+    /** @param mixed[] $attributes */
+    public function reverse(array $attributes): void
     {
         $tasks = array_reverse($this->tasks);
 
-        $tasks = array_filter($tasks, static function ($task) : bool {
+        $tasks = array_filter($tasks, static function ($task): bool {
             return $task instanceof Reversible;
         });
 
         foreach ($this->tasks as $task) {
-            $this->strategy->execute(function () use ($task, $attributes) : void {
+            $this->strategy->execute(static function () use ($task, $attributes): void {
                 $task->reverse($attributes);
             }, $attributes);
         }
     }
 
-    /**
-     * @param mixed[] $attributes
-     */
-    private function checkForDuplicatedKey(Task $task, array $attributes) : void
+    /** @param mixed[] $attributes */
+    private function checkForDuplicatedKey(Task $task, array $attributes): void
     {
         $duplicated = array_intersect_key($this->attributes, $attributes);
 

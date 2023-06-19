@@ -28,12 +28,10 @@ use Throwable;
 class ContinueOnFailure implements Strategy
 {
     /** @var Throwable[] */
-    private $exceptions = [];
+    private array $exceptions = [];
 
-    /**
-     * @param mixed[] $context
-     */
-    public function execute(callable $callback, array $context = []) : void
+    /** @param mixed[] $context */
+    public function execute(callable $callback, array $context = []): void
     {
         try {
             $callback();
@@ -42,10 +40,8 @@ class ContinueOnFailure implements Strategy
         }
     }
 
-    /**
-     * @return Throwable[]
-     */
-    public function exceptions() : array
+    /** @return Throwable[] */
+    public function exceptions(): array
     {
         return $this->exceptions;
     }

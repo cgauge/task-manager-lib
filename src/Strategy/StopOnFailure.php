@@ -25,10 +25,8 @@ namespace CustomerGauge\TaskManager\Strategy;
 
 class StopOnFailure implements Strategy
 {
-    /**
-     * @param mixed[] $context
-     */
-    public function execute(callable $callback, array $context = []) : void
+    /** @param mixed[] $context */
+    public function execute(callable $callback, array $context = []): void
     {
         $callback();
     }

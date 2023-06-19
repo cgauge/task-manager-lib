@@ -25,8 +25,6 @@ namespace CustomerGauge\TaskManager;
 
 interface Reversible
 {
-    /**
-     * @param mixed[] $attributes
-     */
-    public function reverse(array $attributes) : void;
+    /** @param mixed[] $attributes */
+    public function reverse(array $attributes): void;
 }
