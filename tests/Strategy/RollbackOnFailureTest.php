@@ -43,7 +43,7 @@ class RollbackOnFailureTest extends TestCase
             ->method('reverse');
 
         $createFolder->method('run')
-            ->willThrowException(new Exception());
+            ->willThrowException(new CreateFolderException());
 
         $strategy = new RollbackOnFailure();
 
@@ -53,10 +53,16 @@ class RollbackOnFailureTest extends TestCase
             return $createEmail;
         });
 
+        $this->expectException(CreateFolderException::class);
+
         $strategy->execute(static function () use ($createFolder): void {
             $createFolder->run([]);
         });
     }
+}
+
+class CreateFolderException extends Exception
+{
 }
 
 interface ReversibleTask extends Task, Reversible
