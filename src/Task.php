@@ -30,5 +30,5 @@ interface Task
      *
      * @return mixed[]
      */
-    public function run(array $attributes) : array;
+    public function run(array $attributes): array;
 }

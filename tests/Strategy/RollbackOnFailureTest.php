@@ -31,7 +31,7 @@ use PHPUnit\Framework\TestCase;
 
 class RollbackOnFailureTest extends TestCase
 {
-    public function test_it_rollback_when_a_task_fail() : void
+    public function test_it_rollback_when_a_task_fail(): void
     {
         $createEmail  = $this->createMock(ReversibleTask::class);
         $createFolder = $this->createMock(Task::class);
@@ -53,7 +53,7 @@ class RollbackOnFailureTest extends TestCase
             return $createEmail;
         });
 
-        $strategy->execute(static function () use ($createFolder) : void {
+        $strategy->execute(static function () use ($createFolder): void {
             $createFolder->run([]);
         });
     }

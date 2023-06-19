@@ -31,7 +31,7 @@ use Throwable;
 
 class StopOnFailureTest extends TestCase
 {
-    public function test_it_stops_when_a_task_fail() : void
+    public function test_it_stops_when_a_task_fail(): void
     {
         self::expectException(Throwable::class);
 
@@ -46,7 +46,7 @@ class StopOnFailureTest extends TestCase
 
         $strategy = new StopOnFailure();
 
-        $strategy->execute(static function () use ($createEmail, $createFolder) : void {
+        $strategy->execute(static function () use ($createEmail, $createFolder): void {
             $createEmail->run([]);
 
             $createFolder->run([]);
