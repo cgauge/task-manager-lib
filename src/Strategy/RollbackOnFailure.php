@@ -47,8 +47,10 @@ class RollbackOnFailure implements Strategy
             $task = $callback();
 
             array_unshift($this->executed, $task);
-        } catch (Throwable) {
+        } catch (Throwable $e) {
             $this->rollback();
+
+            throw $e;
         }
     }
 
@@ -59,7 +61,10 @@ class RollbackOnFailure implements Strategy
         });
 
         foreach ($tasks as $task) {
-            $task->reverse($this->context);
+            try {
+                $task->reverse($this->context);
+            } catch (Throwable) {
+            }
         }
     }
 }
