@@ -16,9 +16,9 @@
         "php": ">=8.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0",
-        "doctrine/coding-standard": "^12.0",
-        "phpstan/phpstan": "^1.0"
+        "phpunit/phpunit": "^12.0",
+        "doctrine/coding-standard": "^13.0",
+        "phpstan/phpstan": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -27,12 +27,17 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Test\\CustomerGauge\\TaskManager\\": "tests/"
+            "Tests\\CustomerGauge\\TaskManager\\": "tests/"
         }
     },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
+    },
+    "scripts": {
+        "lint": "phpcs",
+        "stan": "phpstan analyze --level=9 ./src ./tests",
+        "test": "phpunit"
     }
 }
