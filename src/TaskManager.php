@@ -46,7 +46,7 @@ class TaskManager implements Task
         $this->strategy = $strategy ?? new StopOnFailure();
     }
 
-    public function add(Task $task): self
+    public function add(Task|Reversible $task): self
     {
         $this->tasks[] = $task;
 
@@ -62,7 +62,9 @@ class TaskManager implements Task
     {
         $this->attributes = $attributes;
 
-        foreach ($this->tasks as $task) {
+        $tasks = array_filter($this->tasks, static fn ($task) => $task instanceof Task);
+
+        foreach ($tasks as $task) {
             $this->strategy->execute(function () use ($task): Task {
                 $attributes = $task->run($this->attributes);
 
@@ -82,9 +84,7 @@ class TaskManager implements Task
     {
         $tasks = array_reverse($this->tasks);
 
-        $tasks = array_filter($tasks, static function ($task): bool {
-            return $task instanceof Reversible;
-        });
+        $tasks = array_filter($tasks, static fn ($task) => $task instanceof Reversible);
 
         foreach ($tasks as $task) {
             $this->strategy->execute(static function () use ($task, $attributes): void {

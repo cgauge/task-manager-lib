@@ -23,15 +23,13 @@ declare(strict_types=1);
 
 namespace Tests\CustomerGauge\TaskManager\Strategy;
 
-use CustomerGauge\TaskManager\Reversible;
 use CustomerGauge\TaskManager\Strategy\RollbackOnFailure;
 use CustomerGauge\TaskManager\Task;
-use Exception;
 use PHPUnit\Framework\TestCase;
 
 class RollbackOnFailureTest extends TestCase
 {
-    public function test_it_rollback_when_a_task_fail(): void
+    public function testItRollbackWhenATaskFail(): void
     {
         $createEmail  = $this->createMock(ReversibleTask::class);
         $createFolder = $this->createMock(Task::class);
@@ -43,7 +41,7 @@ class RollbackOnFailureTest extends TestCase
             ->method('reverse');
 
         $createFolder->method('run')
-            ->willThrowException(new CreateFolderException());
+            ->willThrowException(new InvalidPermission());
 
         $strategy = new RollbackOnFailure();
 
@@ -53,18 +51,10 @@ class RollbackOnFailureTest extends TestCase
             return $createEmail;
         });
 
-        $this->expectException(CreateFolderException::class);
+        $this->expectException(InvalidPermission::class);
 
         $strategy->execute(static function () use ($createFolder): void {
             $createFolder->run([]);
         });
     }
-}
-
-class CreateFolderException extends Exception
-{
-}
-
-interface ReversibleTask extends Task, Reversible
-{
 }

@@ -31,7 +31,7 @@ use Throwable;
 
 class StopOnFailureTest extends TestCase
 {
-    public function test_it_stops_when_a_task_fail(): void
+    public function testItStopsWhenATaskFail(): void
     {
         self::expectException(Throwable::class);
 

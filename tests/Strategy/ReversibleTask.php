@@ -21,24 +21,11 @@
 
 declare(strict_types=1);
 
-namespace CustomerGauge\TaskManager;
+namespace Tests\CustomerGauge\TaskManager\Strategy;
 
-use InvalidArgumentException;
+use CustomerGauge\TaskManager\Reversible;
+use CustomerGauge\TaskManager\Task;
 
-use function implode;
-use function sprintf;
-
-final class InvalidTaskAttribute extends InvalidArgumentException
+interface ReversibleTask extends Task, Reversible
 {
-    /** @param array<int, int|string> $keys */
-    public static function duplicatedKey(Task $task, array $keys): self
-    {
-        $message = sprintf(
-            'Duplicate task [%s] attribute keys [%s]. Use a different attribute key.',
-            $task::class,
-            implode(', ', $keys),
-        );
-
-        return new static($message);
-    }
 }
