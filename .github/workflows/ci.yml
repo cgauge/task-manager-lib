@@ -1,7 +1,7 @@
 name: Tests
 
 env:
-  PHP_VERSION: 8.2
+  PHP_VERSION: 8.3
 
 on:
   push:
@@ -23,5 +23,11 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
       
+      - name: Lint
+        run: composer lint
+
+      - name: Static analysis
+        run: composer stan
+
       - name: Test
-        run: ./vendor/bin/phpunit
+        run: composer test

@@ -31,7 +31,7 @@ use PHPUnit\Framework\TestCase;
 
 class TaskManagerTest extends TestCase
 {
-    public function test_it_can_run_tasks(): void
+    public function testItCanRunTasks(): void
     {
         $createEmail  = $this->createMock(Task::class);
         $createFolder = $this->createMock(Task::class);
@@ -50,7 +50,7 @@ class TaskManagerTest extends TestCase
         $manager->run([]);
     }
 
-    public function test_it_can_manage_attributes(): void
+    public function testItCanManageAttributes(): void
     {
         $createEmail    = $this->createMock(Task::class);
         $createFolder   = $this->createMock(Task::class);
@@ -75,7 +75,7 @@ class TaskManagerTest extends TestCase
         $manager->run([]);
     }
 
-    public function test_task_can_not_use_same_key_in_attributes(): void
+    public function testTaskCanNotUseSameKeyInAttributes(): void
     {
         $this->expectException(InvalidTaskAttribute::class);
 
@@ -96,10 +96,10 @@ class TaskManagerTest extends TestCase
         $manager->run([]);
     }
 
-    public function test_task_can_be_revertable(): void
+    public function testTaskCanBeRevertable(): void
     {
-        $createEmail  = $this->createMock(ReversibleTask::class);
-        $createFolder = $this->createMock(ReversibleTask::class);
+        $createEmail  = $this->createMock(Reversible::class);
+        $createFolder = $this->createMock(Reversible::class);
 
         $createEmail->expects($this->once())
             ->method('reverse');
@@ -114,8 +114,4 @@ class TaskManagerTest extends TestCase
 
         $manager->reverse([]);
     }
-}
-
-interface ReversibleTask extends Task, Reversible
-{
 }

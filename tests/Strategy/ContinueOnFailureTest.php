@@ -30,7 +30,7 @@ use PHPUnit\Framework\TestCase;
 
 class ContinueOnFailureTest extends TestCase
 {
-    public function test_it_continues_when_a_task_fail(): void
+    public function testItContinuesWhenATaskFail(): void
     {
         $createEmail  = $this->createMock(Task::class);
         $createFolder = $this->createMock(Task::class);
@@ -52,7 +52,7 @@ class ContinueOnFailureTest extends TestCase
         });
     }
 
-    public function test_it_stores_exceptions(): void
+    public function testItStoresExceptions(): void
     {
         $createEmail  = $this->createMock(Task::class);
         $createFolder = $this->createMock(Task::class);
